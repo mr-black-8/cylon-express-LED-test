@@ -7,12 +7,14 @@ var pi = Cylon.robot({
   },
 
   devices: {
-    led: { driver: 'led', pin: 11 }
+    pin: { driver: 'direct-pin', pin: 11 }
   },
 
   work: function(my) {
+    var value = 0
     every((1).second(), function(){
-      my.led.toggle();
+      my.pin.digitalWrite(value)
+      value = (value == 0) ? 1 : 0;
     })
   }
 })
