@@ -7,13 +7,12 @@ var pi = Cylon.robot({
   },
 
   devices: {
-    led: { driver: 'led' }
+    led: { driver: 'led', pin: 11 }
   },
 
-  work: function() {
+  work: function(my) {
     every((1).second(), function(){
-      num = Math.random() * 255
-      my.led.brightness(num)
+      my.led.toggle();
     })
   }
 })
@@ -42,6 +41,6 @@ app.get("/on", function(req, res) {
 
 app.get("/off", function(req, res) {
   console.log("off")
-  pi.halt();
+  pi.stop();
   res.redirect("/")
 });
