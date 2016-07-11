@@ -41,6 +41,6 @@ app.get("/on", function(req, res) {
 
 app.get("/off", function(req, res) {
   console.log("off")
-  pi.stop();
+  pi.halt();
   res.redirect("/")
 });
