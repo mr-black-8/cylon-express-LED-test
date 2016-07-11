@@ -1,19 +1,12 @@
 var express = require('express');
-var Cylon = require('cylon');
 
-Cylon.robot({
-  connections: {
-    raspi: { adaptor: 'raspi' }
-  },
+var app = express();
+app.use( express.static("assets") );
 
-  devices: {
-    led: { drived: 'led' }
-  },
+app.listen(1337, function(){
+  console.log("Server started on port 1337")
+});
 
-  work: function() {
-    every((1).second(), function(){
-      num = Math.random() * 255
-      my.led.brightness(num)
-    })
-  }
-}).start();
+app.get("/", function(req, res) {
+  res.sendFile( __dirname + "/index.html");
+});
